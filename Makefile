@@ -7,7 +7,7 @@ EXT_OLD_VERSIONS = 3.1
 Contrib_regress   = pgq_coop_init_noext pgq_coop_test
 Extension_regress = pgq_coop_init_ext   pgq_coop_test
 
-include ../common-pgxs.mk
+include mk/common-pgxs.mk
 
 #
 # docs
@@ -17,4 +17,11 @@ dox: cleandox $(SRCS)
 	mkdir -p docs/sql
 	$(CATSQL) --ndoc structure/functions.sql > docs/sql/functions.sql
 	$(NDOC) $(NDOCARGS)
+
+deb:
+	make -f debian/rules genfiles
+	debuild -us -uc -b
+
+debclean:
+	make -f debian/rules debclean
 
