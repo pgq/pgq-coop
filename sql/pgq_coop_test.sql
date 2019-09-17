@@ -1,3 +1,4 @@
+\set VERBOSITY 'terse'
 
 select pgq.create_queue('testqueue');
 update pgq.queue set queue_ticker_max_count = 1 where queue_name = 'testqueue';

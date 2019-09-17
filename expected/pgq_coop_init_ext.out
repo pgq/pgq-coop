@@ -1,3 +1,4 @@
+\set VERBOSITY 'terse'
 create extension pgq;
 \set ECHO none
 create extension pgq_coop from 'unpackaged';

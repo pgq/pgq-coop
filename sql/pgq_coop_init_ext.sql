@@ -1,3 +1,4 @@
+\set VERBOSITY 'terse'
 
 create extension pgq;
 

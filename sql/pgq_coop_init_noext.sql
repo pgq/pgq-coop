@@ -1,3 +1,4 @@
+\set VERBOSITY 'terse'
 
 \set ECHO none
 \i ../pgq/pgq.sql
