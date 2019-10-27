@@ -50,7 +50,11 @@ group1 = select, insert, update
 """
 
 import sys, os, getopt
-from ConfigParser import SafeConfigParser
+
+try:
+    from configparser import ConfigParser
+except ImportError:
+    from ConfigParser import SafeConfigParser as ConfigParser
 
 __version__ = "1.0"
 
@@ -70,10 +74,10 @@ def usage(err):
     sys.stderr.write("  -t   Put everything in one big transaction\n")
     sys.exit(err)
 
-class PConf(SafeConfigParser):
+class PConf(ConfigParser):
     "List support for ConfigParser"
     def __init__(self, defaults = None):
-        SafeConfigParser.__init__(self, defaults)
+        ConfigParser.__init__(self, defaults)
 
     def get_list(self, sect, key):
         str = self.get(sect, key).strip()
@@ -130,7 +134,7 @@ class GrantFu:
         for self.sect in sect_list:
             if self.sect == "GrantFu":
                 continue
-            print "\n-- %s --" % self.sect
+            print ("\n-- %s --" % self.sect)
 
             self.handle_tables()
             self.handle_other('on.databases', 'DATABASE')
@@ -203,7 +207,7 @@ class GrantFu:
         if len(self.seq_list) > 0:
             obj_str += ", " + ", ".join(self.seq_list)
         obj_str = obj_str.strip().replace('\n', '\n    ')
-        print "REVOKE ALL ON %s\n  FROM %s CASCADE;" % (obj_str, self.all_subjs)
+        print ("REVOKE ALL ON %s\n  FROM %s CASCADE;" % (obj_str, self.all_subjs))
 
     def gen_revoke_defs(self, obj_str, obj_type):
         "Generate revoke defaults for one section"
@@ -219,7 +223,7 @@ class GrantFu:
             return
 
         obj_str = obj_str.strip().replace('\n', '\n    ')
-        print "REVOKE ALL ON %s\n  FROM %s CASCADE;" % (obj_str, defrole)
+        print ("REVOKE ALL ON %s\n  FROM %s CASCADE;" % (obj_str, defrole))
 
     def gen_defs(self, obj_str, obj_type):
         "Generate defaults grants for one section"
@@ -236,7 +240,7 @@ class GrantFu:
         defrole = 'public'
 
         obj_str = obj_str.strip().replace('\n', '\n    ')
-        print "GRANT %s ON %s\n  TO %s;" % (defgrants, obj_str, defrole)
+        print ("GRANT %s ON %s\n  TO %s;" % (defgrants, obj_str, defrole))
 
     def gen_one_subj(self, subj, fqsubj, obj_str):
         if not self.sect_hasvar(subj):
@@ -244,7 +248,7 @@ class GrantFu:
         obj_str = obj_str.strip().replace('\n', '\n    ')
         perm = self.sect_var(subj).strip()
         if perm:
-            print "GRANT %s ON %s\n  TO %s;" % (perm, obj_str, fqsubj)
+            print ("GRANT %s ON %s\n  TO %s;" % (perm, obj_str, fqsubj))
 
         # check for seq perms
         if len(self.seq_list) > 0:
@@ -265,10 +269,10 @@ class GrantFu:
             seq_str = ", ".join(self.seq_list)
             subj_str = ", ".join(self.seq_allowed)
             if self.seq_usage:
-                cmd = "GRANT usage ON SEQUENCE %s\n  TO %s;"
+                cmd = ("GRANT usage ON SEQUENCE %s\n  TO %s;")
             else:
-                cmd = "GRANT select, update ON %s\n  TO %s;"
-            print cmd % (seq_str, subj_str)
+                cmd = ("GRANT select, update ON %s\n  TO %s;")
+            print (cmd % (seq_str, subj_str))
 
     def sect_var(self, name):
         return self.cf.get(self.sect, name).strip()
@@ -285,8 +289,8 @@ def main():
 
     try:
         opts, args = getopt.getopt(sys.argv[1:], "vhrRdDot")
-    except getopt.error, det:
-        print "getopt error:", det
+    except getopt.error as det:
+        print ("getopt error:", det)
         usage(1)
 
     for o, v in opts:
@@ -305,7 +309,7 @@ def main():
         elif o == "-t":
             tx = True
         elif o == "-v":
-            print "GrantFu version", __version__
+            print ("GrantFu version", __version__)
             sys.exit(0)
 
     if len(args) != 1:
@@ -315,11 +319,11 @@ def main():
     cf = PConf()
     cf.read(args[0])
     if not cf.has_section("GrantFu"):
-        print "Incorrect config file, GrantFu sction missing"
+        print ("Incorrect config file, GrantFu sction missing")
         sys.exit(1)
 
     if tx:
-        print "begin;\n"
+        print ("begin;\n")
 
     # revokes and default grants
     if revoke & (R_NEW | R_DEFS):
@@ -333,7 +337,7 @@ def main():
         g.process()
 
     if tx:
-        print "\ncommit;\n"
+        print ("\ncommit;\n")
 
 if __name__ == '__main__':
     main()
