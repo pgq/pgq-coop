@@ -25,3 +25,8 @@ pgq_coop.sql
 pgq_coop.upgrade.sql
 
 results/
+
+docs/Data
+docs/html
+docs/sql
+
