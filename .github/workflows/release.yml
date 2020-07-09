@@ -13,6 +13,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Build
+        run: |
+          VERSION=$(grep ^EXT_VERSION Makefile | sed 's/.*= *//')
+          echo "::warning::VERSION=${VERSION}"
+          echo "::set-env name=VERSION::${VERSION}"
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
@@ -20,8 +25,8 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           tag_name: ${{github.ref}}
-          release_name: pgq-coop ${{github.ref}}
-          body_path: docs/notes/${{github.ref}}.md
+          release_name: ${{github.event.repository.name}} w${{env.VERSION}}
+          body_path: docs/notes/v${{env.VERSION}}.md
           draft: false
           prerelease: false
 
