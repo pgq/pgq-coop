@@ -1,8 +1,8 @@
 
 EXTENSION = pgq_coop
 
-EXT_VERSION = 3.3.7
-EXT_OLD_VERSIONS = 3.1 3.1.1 3.3 3.3.1 3.3.2 3.3.3 3.3.4 3.3.5 3.3.6
+EXT_VERSION = 3.3.8
+EXT_OLD_VERSIONS = 3.1 3.1.1 3.3 3.3.1 3.3.2 3.3.3 3.3.4 3.3.5 3.3.6 3.3.8
 
 Contrib_regress   = pgq_coop_init_noext pgq_coop_test
 Extension_regress = pgq_coop_init_ext   pgq_coop_test
@@ -24,8 +24,4 @@ deb:
 
 debclean:
 	make -f debian/rules debclean
-
-TARNAME = $(EXTENSION)-$(EXT_VERSION)
-dist:
-	git archive --format=tar.gz --prefix=$(TARNAME)/ -o $(TARNAME).tar.gz HEAD
 

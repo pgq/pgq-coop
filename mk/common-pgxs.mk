@@ -144,10 +144,16 @@ structure/oldgrants_$(EXTENSION).sql: structure/grants.ini structure/grants.sql
 
 checkver:
 	@echo "Checking version numbers"
-	grep -q "^default_version *= *'$(EXT_VERSION)'" $(EXTENSION).control \
+	@grep -q "^default_version *= *'$(EXT_VERSION)'" $(EXTENSION).control \
 		|| { echo "ERROR: $(EXTENSION).control has wrong version"; exit 1; }
-	test -f "docs/notes/v$(EXT_VERSION).md" \
+	@test -f "docs/notes/v$(EXT_VERSION).md" \
 		|| { echo "ERROR: notes missing: docs/notes/v$(EXT_VERSION).md"; exit 1; }
-	head debian/changelog | grep -q "[(]$(EXT_VERSION)-" debian/changelog \
+	@head debian/changelog | grep -q "[(]$(EXT_VERSION)-" debian/changelog \
 		|| { echo "ERROR: debian/changelog has wrong version"; exit 1; }
+
+all: checkver
+
+TARNAME = $(EXTENSION)-$(EXT_VERSION)
+dist: checkver
+	git archive --format=tar.gz --prefix=$(TARNAME)/ -o $(TARNAME).tar.gz HEAD
 
