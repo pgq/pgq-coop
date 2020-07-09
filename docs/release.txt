@@ -1,3 +1,6 @@
 
-follow pgq/docs/release.txt
+* Set new version number in .control, Makefile, debian/changelog
+* Add release notes to docs/notes
+* Commit, tag
+* Push tag
 

@@ -1,26 +1,8 @@
-pgq-coop (3.3.8-1) unstable; urgency=low
+pgq-coop (3.4-1) unstable; urgency=low
 
-  * v3.3.8
+  * v3.4
 
- -- Marko Kreen <markokr@gmail.com>  Thu, 09 Jul 2020 17:46:44 +0300
-
-pgq-coop (3.3.7-1) unstable; urgency=low
-
-  * v3.3.7
-
- -- Marko Kreen <markokr@gmail.com>  Thu, 09 Jul 2020 17:15:40 +0300
-
-pgq-coop (3.3.6-1) unstable; urgency=low
-
-  * v3.3.6
-
- -- Marko Kreen <markokr@gmail.com>  Thu, 09 Jul 2020 16:59:24 +0300
-
-pgq-coop (3.3.5-1) unstable; urgency=low
-
-  * v3.3.5
-
- -- Marko Kreen <markokr@gmail.com>  Thu, 09 Jul 2020 16:55:39 +0300
+ -- Marko Kreen <markokr@gmail.com>  Thu, 09 Jul 2020 17:53:43 +0300
 
 pgq-coop (3.3.1-1) unstable; urgency=low
 

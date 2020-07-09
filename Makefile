@@ -1,8 +1,8 @@
 
 EXTENSION = pgq_coop
 
-EXT_VERSION = 3.3.8
-EXT_OLD_VERSIONS = 3.1 3.1.1 3.3 3.3.1 3.3.2 3.3.3 3.3.4 3.3.5 3.3.6 3.3.8
+EXT_VERSION = 3.4
+EXT_OLD_VERSIONS = 3.1 3.1.1 3.3 3.3.1
 
 Contrib_regress   = pgq_coop_init_noext pgq_coop_test
 Extension_regress = pgq_coop_init_ext   pgq_coop_test
