@@ -20,8 +20,8 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           tag_name: ${{github.ref}}
-          release_name: Release ${{github.ref}}
-          body_path: doc/relnotes/${{github.ref}}.md
+          release_name: pgq-coop ${{github.ref}}
+          body_path: docs/notes/${{github.ref}}.md
           draft: false
           prerelease: false
 
