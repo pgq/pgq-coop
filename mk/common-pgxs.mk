@@ -157,3 +157,8 @@ TARNAME = $(EXTENSION)-$(EXT_VERSION)
 dist: checkver
 	git archive --format=tar.gz --prefix=$(TARNAME)/ -o $(TARNAME).tar.gz HEAD
 
+release: checkver
+	git tag v$(EXT_VERSION)
+	git push github
+	git push github --tag
+
