@@ -16,11 +16,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        PGVER:
-          - 10
-          - 11
-          - 12
-          - 13
+        PGVER: [11]
     steps:
       - name: "Checkout"
         uses: actions/checkout@v2
