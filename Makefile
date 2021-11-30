@@ -18,10 +18,3 @@ dox: cleandox $(SRCS)
 	$(CATSQL) --ndoc structure/functions.sql > docs/sql/functions.sql
 	$(NDOC) $(NDOCARGS)
 
-deb:
-	make -f debian/rules genfiles
-	debuild -us -uc -b
-
-debclean:
-	make -f debian/rules debclean
-
